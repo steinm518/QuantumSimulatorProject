@@ -1,4 +1,5 @@
 import math
+import itertools
 Matrix = list[list[float]]
 def zeroes(x:int,y:int):
     mat:Matrix=[]
@@ -48,3 +49,10 @@ def scale(mat1:Matrix,num:int):
         for y in range(len(mat1[0])):
             mat2[x][y]=num*mat1[x][y]
     return mat2
+
+def getBinaryStrings(length):
+    chars = "01"
+    returnList = []
+    for item in itertools.product(chars, repeat=length):
+        returnList.append("".join(item))
+    return returnList

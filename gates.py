@@ -2,14 +2,16 @@ import utilities
 import math
 def qubit():
     return [[0,0]]
+def I():
+    return [[1,0],[0,1]]
 def H():
     return utilities.scale([[1,1],[1,-1]],math.sqrt(2))
 def NOT():
-    return notGate=[[0,1],[1,0]]
+    return [[0,1],[1,0]]
 def Zgate():
-    return zgate=[[1,0],[0,-1]]
+    return [[1,0],[0,-1]]
 def rGate(theta:float):
-    return rgate=[[math.cos(theta),math.sin(theta)],[-math.sin(theta),math.cos(theta)]]
+    return [[math.cos(theta),math.sin(theta)],[-math.sin(theta),math.cos(theta)]]
 
 def zeroQubit():
     return [[1,0]]
