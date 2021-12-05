@@ -16,7 +16,10 @@ def matmul(mat1:Matrix, mat2:Matrix):
     for row in mat1:
         curRow=[]
         for col in mat2: 
-             curRow.append(sum(row*col))
+            summ=0
+            for i in range(len(col)):
+                summ+=row[i]*col[i]
+            curRow.append(summ)
         mat3.append(curRow)
     return mat3
 
@@ -34,7 +37,6 @@ def transpose(mat1:Matrix):
 
 def tensor(mat1:Matrix,mat2:Matrix):
     tensorSize = (len(mat1)*len(mat2),len(mat2[0])*len(mat1[0]))
-    print(tensorSize)
     mat3=[]
     for row1 in mat1:
         for col2 in mat2:
