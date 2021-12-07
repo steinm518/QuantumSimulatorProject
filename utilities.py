@@ -1,5 +1,7 @@
+from __future__ import annotations
 import math
 import itertools
+
 Matrix = list[list[float]]
 def zeroes(x:int,y:int):
     mat:Matrix=[]
@@ -39,10 +41,10 @@ def tensor(mat1:Matrix,mat2:Matrix):
     tensorSize = (len(mat1)*len(mat2),len(mat2[0])*len(mat1[0]))
     mat3=[]
     for row1 in mat1:
-        for col2 in mat2:
+        for row2 in mat2:
             curRow=[]
             for x in row1:
-                curRow.extend((scale([col2],x)[0]))
+                curRow.extend((scale([row2],x)[0]))
             mat3.append(curRow)
     return mat3
 def scale(mat1:Matrix,num:int):

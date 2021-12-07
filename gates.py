@@ -5,7 +5,7 @@ def qubit():
 def I():
     return [[1,0],[0,1]]
 def H():
-    return utilities.scale([[1,1],[1,-1]],math.sqrt(2))
+    return utilities.scale([[1,1],[1,-1]],(math.sqrt(2)/2))
 def NOT():
     return [[0,1],[1,0]]
 def Z():
@@ -24,6 +24,7 @@ def apply_gate(gate:utilities.Matrix,qubits:utilities.Matrix,position_of_qubit_t
 
 def make_full_gate(gate:utilities.Matrix,total_number_of_qubits, qubitPosition, controlQubits=[]):
     tensorView = make_complete_identity_tensor(total_number_of_qubits)
+    
     matrixView = []
     for row in tensorView:
         for i in range(0,len(controlQubits)):
@@ -34,17 +35,17 @@ def make_full_gate(gate:utilities.Matrix,total_number_of_qubits, qubitPosition, 
         newRow = row[0]
         for i in range(1,len(row)):
             newRow = utilities.tensor(newRow,row[i])
-        matrixView.append(newRow)
-    return matrixView[0]
+        matrixView.extend(newRow)
+    return matrixView
     
 
 def make_complete_identity_tensor(size):
     prodMatrix = []
-    for i in range(0, size):
+    for i in range(0, pow(2,size)):
         newRow = bin(int(i))[2:].zfill(size)
         newMatrRow = []
         for j in range(0,len(newRow)):#Pseudo-code until I figure out what actually works
-            if newRow[j] == 0:
+            if newRow[j] == "0":
                 newMatrRow.append(zeroQubit())
             else:
                 newMatrRow.append(oneQubit())
