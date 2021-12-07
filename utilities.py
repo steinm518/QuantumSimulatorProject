@@ -2,7 +2,7 @@ from __future__ import annotations
 import math
 import itertools
 
-Matrix = list[list[float]]
+Matrix = list#list[list[float]]
 def zeroes(x:int,y:int):
     mat:Matrix=[]
     for i in range(x):

@@ -24,13 +24,14 @@ def apply_gate(gate:utilities.Matrix,qubits:utilities.Matrix,position_of_qubit_t
 
 def make_full_gate(gate:utilities.Matrix,total_number_of_qubits, qubitPosition, controlQubits=[]):
     tensorView = make_complete_identity_tensor(total_number_of_qubits)
-    
+
     matrixView = []
     for row in tensorView:
-        for i in range(0,len(controlQubits)):
-            if row[controlQubits[i]] != [1,0]:
-                break
-        else:
+        apply = True
+        for i in controlQubits:
+            if row[i] == zeroQubit():
+                apply = False
+        if apply: 
             row[qubitPosition] = utilities.matmul(row[qubitPosition],gate)
         newRow = row[0]
         for i in range(1,len(row)):
@@ -44,7 +45,7 @@ def make_complete_identity_tensor(size):
     for i in range(0, pow(2,size)):
         newRow = bin(int(i))[2:].zfill(size)
         newMatrRow = []
-        for j in range(0,len(newRow)):#Pseudo-code until I figure out what actually works
+        for j in range(0,len(newRow)):
             if newRow[j] == "0":
                 newMatrRow.append(zeroQubit())
             else:
